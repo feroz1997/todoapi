@@ -1,6 +1,8 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelizeConnection from '../config';
 
+
+
 export interface DoableTask {
   id: string;
   description?: string | undefined;
