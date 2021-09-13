@@ -7,6 +7,8 @@ const userRouter = Router();
 userRouter.post('/create', UserController.create);
 userRouter.post('/auth', UserController.auth);
 userRouter.get('/:id', UserController.getUser);
+userRouter.get('/google/auth', UserController.googleAuth);
+userRouter.post('/google/auth', UserController.googleUserDetails);
 
 
 

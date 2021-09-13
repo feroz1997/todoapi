@@ -14,4 +14,12 @@ export default class UserController {
     const {id} = req.params;
     return HttpResponse.response(res,await UserService.fetchById(id))
   }
+  static async googleAuth(req: Request, res: Response): Promise<Response> {
+    return HttpResponse.response(res,await UserService.authWithGoogle())
+  }
+  static async googleUserDetails(req: Request, res: Response): Promise<Response> {
+    const {code} = req.body;
+    return HttpResponse.response(res,await UserService.authWithGoogleDetails(code))
+  }
+  // googleUserDetails
 }
