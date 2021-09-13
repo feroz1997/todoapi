@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { decodeToken } from '../../Infrastructor/utils/userUtils';
 import UserSerivce from '../../Application/services/User';
-import { UserOutput } from '../../Infrastructor/models/User';
 import HttpResponse from '../../Application/utils/HttpResponse';
 import HttpStatusCode from '../../Application/utils/HttpStatusCode';
+import UserEntity from '../../Application/Entities/UserEntity';
+
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -18,9 +19,9 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     }
     const decoded = decodeToken(token, 'SECRET');
     const { statusCode, data } = await UserSerivce.fetchById(decoded.userId);
-    const user: UserOutput = JSON.parse(JSON.stringify(data));
+    const user: UserEntity = JSON.parse(JSON.stringify(data));
     if (statusCode === HttpStatusCode.OK && user.loggedToken === token) {
-      req.body.UserId = user.id;
+      req.body.UserId = user.userId;
       return next();
     }
     throw Error('Please Aunthenticate....!');
