@@ -1,5 +1,5 @@
 export default class User{
-    private constructor (public id:string, public email:string, public password:string, public loggedTokken:string){
+    private constructor (public id:string, public email:string, public password:string, public loggedToken:string){
     }
     static create(userData:any){
         const {id,email,password,loggedToken} = userData;
