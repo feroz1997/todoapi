@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 
-export const authToken = (data: object | string, secret: string): string => {
+export const authToken = (data: object | string, secret: any): string => {
     return jwt.sign(data,secret);
 };
 

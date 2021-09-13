@@ -8,7 +8,7 @@ export default class UserController {
   }
 
   static async auth(req: Request, res: Response): Promise<Response> {
-    return HttpResponse.response(res, await UserService.auth(req.body));
+    return HttpResponse.response(res, await UserService.auth(req.body.user));
   }
   static async getUser(req: Request, res: Response): Promise<Response> {
     const {id} = req.params;
