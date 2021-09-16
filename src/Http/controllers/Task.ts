@@ -1,29 +1,29 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
 
-import TaskService from '../../Application/services/Task';
-import HttpResponse from '../../Application/utils/HttpResponse';
-
+import TaskService from "../../Application/services/TaskService";
+import HttpResponse from "../../Application/utils/HttpResponse";
 
 export default class TaskController {
-  static async create(req: Request, res: Response): Promise<Response> {
-    return HttpResponse.response(res, await TaskService.create(req.body));
-  }
+    static async create(req: Request, res: Response): Promise<Response> {
+        return HttpResponse.response(res, await TaskService.create(req.body));
+    }
 
-  static async updateById(req: Request, res: Response): Promise<Response> {
-    const { id } = req.params;
-    return HttpResponse.response(res, await TaskService.update(id, req.body));
-  }
+    static async updateById(req: Request, res: Response): Promise<Response> {
+        return HttpResponse.response(res, await TaskService.update(req.body));
+    }
 
-  static async remove(req: Request, res: Response): Promise<Response> {
-    const { id } = req.params;
-    return HttpResponse.response(res, await TaskService.remove(id,req.body.UserId));
-  }
+    static async remove(req: Request, res: Response): Promise<Response> {
+        const { taskId } = req.body;
+        return HttpResponse.response(res, await TaskService.remove(taskId));
+    }
 
-  static async fetchById(req: Request, res: Response):Promise<Response>{
-    const { id } = req.params;
-    return HttpResponse.response(res, await TaskService.fetchById(id));
-  }
-  static async fetchAll(req: Request, res: Response): Promise<Response> {
-    return HttpResponse.response(res, await TaskService.fetchAll());
-  }
+    static async fetchById(req: Request, res: Response): Promise<Response> {
+        const { taskId } = req.params;
+        return HttpResponse.response(res, await TaskService.fetchById(taskId));
+    }
+
+    static async fetchAll(req: Request, res: Response): Promise<Response> {
+        const { page, size } = req.query;
+        return HttpResponse.response(res, await TaskService.fetchAll(Number(page),Number(size)));
+    }
 }
